@@ -1,0 +1,1 @@
+# discourse-require-edit-reason
