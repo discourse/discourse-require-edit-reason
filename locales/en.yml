@@ -1,0 +1,6 @@
+---
+en:
+  education_modal:
+    title: Edit Reason Required
+    message: 'Before you can submit an edit, you must select <b><i>(add edit reason)</i></b>
+              at the top of the composer and enter a reason for editing the post.'

@@ -1,0 +1,38 @@
+<script type="text/discourse-plugin"version="0.8.30">
+  const showModal = require("discourse/lib/show-modal").default;
+  api.modifyClass("controller:composer", {
+    actions: {
+      save() {
+        let requiredGroups = settings.edit_reason_required_groups.split('|');
+
+        let user = this.model.user;
+        let userGroups = user.groups.map(group => group.name);
+
+        let isEditComposer = this.model.action === "edit";
+        let hasEditReason = this.editReason;
+        let isRequired = requiredGroups.some(group => userGroups.indexOf(group) >= 0);
+
+        if(isEditComposer && !hasEditReason && isRequired) {
+          let updatedAt = moment(this.model.post.updated_at);
+          let now = moment();
+          if(now.diff(updatedAt, 'seconds') > settings.edit_reason_grace_period) {
+            showModal("edit-reason");
+          } else {
+            this._super();
+          }
+        } else {
+          this._super();
+        }
+      }
+    }
+  });
+</script>
+
+<script type="text/x-handlebars" data-template-name="modal/edit-reason">
+  {{#d-modal-body rawTitle=(theme-i18n "education_modal.title") class="edit-reason-modal"}}
+    {{{theme-i18n "education_modal.message"}}}
+  {{/d-modal-body}}
+  <div class="modal-footer">
+    {{#d-button action=(action "closeModal") class="btn-primary"}}{{i18n "composer.modal_ok"}}{{/d-button}}
+  </div>
+</script>

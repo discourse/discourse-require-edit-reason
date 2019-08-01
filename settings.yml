@@ -1,0 +1,18 @@
+---
+edit_reason_required_groups:
+  type: list
+  default: staff|trust_level_4
+  description: 
+    en: 'These groups will be required to add an edit reason'
+edit_reason_grace_period:
+  type: integer
+  default: 0
+  description: 
+    en: 'Set this to the same value you have set in the 
+         <a href="/admin/site_settings/category/all_results?filter=editing_grace_period">
+           editing_grace_period
+         </a>
+         site setting if the requirement should be enforced only after the grace period 
+         has ended. Keeping the setting at 0 will always require an edit reason for users
+         that belong to a group that was added to the "edit reason required groups" theme 
+         setting.'
