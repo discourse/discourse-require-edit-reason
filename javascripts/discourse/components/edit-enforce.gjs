@@ -7,7 +7,6 @@ import willDestroy from "@ember/render-modifiers/modifiers/will-destroy";
 import { service } from "@ember/service";
 import icon from "discourse/helpers/d-icon";
 import { i18n } from "discourse-i18n";
-import { not } from "truth-helpers";
 
 export default class EditEnforce extends Component {
   @service enforceEditReason;
@@ -93,11 +92,11 @@ export default class EditEnforce extends Component {
           this.enforceEditReason.composerModel.action
         }}
       >
-        {{#if (not this.hasEditReason)}}
+        {{#if this.hasEditReason}}
+          {{icon "check"}}
+        {{else}}
           {{icon "triangle-exclamation"}}
           {{i18n "form_kit.errors.required"}}
-        {{else}}
-          {{icon "check"}}
         {{/if}}
       </div>
     {{/if}}
