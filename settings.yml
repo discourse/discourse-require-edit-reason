@@ -1,2 +1,8 @@
-example_setting:
-  default: true
+edit_reason_required_groups:
+  default: ""
+  type: list
+  list_type: group
+
+edit_reason_grace_period:
+  default: 0
+  type: integer

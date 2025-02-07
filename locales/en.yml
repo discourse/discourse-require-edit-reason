@@ -1,5 +1,6 @@
 en:
   theme_metadata:
-    description: ''
+    description: ""
     settings:
-      example_setting: A description of a setting.
+      edit_reason_required_groups: These groups will be required to provide an edit reason
+      edit_reason_grace_period: Number of minutes since the last edit to allow editing without a reason, 0 to disable

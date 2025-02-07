@@ -1,0 +1,40 @@
+#reply-control .reply-to .reply-details {
+  .edit-enforcer {
+    order: 2;
+    margin-left: 0.25em;
+    .d-icon {
+      color: var(--success);
+    }
+    &.--danger {
+      color: var(--danger);
+      .d-icon {
+        color: var(--danger);
+      }
+    }
+
+    &.--animate {
+      @media (prefers-reduced-motion: no-preference) {
+        animation: 0.15s slidein 3;
+      }
+
+      + .display-edit-reason {
+        #edit-reason {
+          @media (prefers-reduced-motion: no-preference) {
+            animation: 0.15s slidein 3;
+          }
+        }
+      }
+    }
+
+    &.--highlight {
+      + .display-edit-reason {
+        #edit-reason {
+          &:not(:focus) {
+            outline: 2px solid var(--danger);
+            outline-offset: -2px;
+          }
+        }
+      }
+    }
+  }
+}
