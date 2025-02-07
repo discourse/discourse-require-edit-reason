@@ -1,6 +1,8 @@
 {
   "name": "Require Edit Reason",
+  "component": true,
+  "authors": "Discourse",
   "about_url": "https://meta.discourse.org/t/require-edit-reason/124593",
-  "license_url": "https://github.com/tshenry/discourse-require-edit-reason/blob/master/LICENSE",
-  "component": true
+  "license_url": "https://github.com/discourse/discourse-require-edit-reason/blob/master/LICENSE",
+  "theme_version": "0.0.1"
 }
