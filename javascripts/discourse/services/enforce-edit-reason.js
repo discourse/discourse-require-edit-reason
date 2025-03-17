@@ -40,10 +40,9 @@ export default class EnforceEditReason extends Service {
 
     const post = this.composer.model.post;
     const now = Date.now();
-    const gracePeriod = settings.edit_reason_grace_period * 1000;
+    const gracePeriod = settings.edit_reason_grace_period * 60 * 1000;
     const lastEdit = new Date(post.updated_at);
-
-    return now - lastEdit > gracePeriod;
+    return now - lastEdit.getTime() > gracePeriod;
   }
 
   get shouldEnforce() {

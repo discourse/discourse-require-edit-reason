@@ -1,6 +1,6 @@
 RSpec.describe "Require Edit Reason", type: :system do
   let!(:theme) { upload_theme_component }
-  
+
   fab!(:admin)
   fab!(:user) { Fabricate(:user) }
   fab!(:group) { Fabricate(:group) }
@@ -19,6 +19,10 @@ RSpec.describe "Require Edit Reason", type: :system do
 
   def force_edit_grace_period
     post.update!(updated_at: 10.minutes.ago)
+  end
+
+  def unset_force_edit_grace_period
+    post.update!(updated_at: 4.minutes.ago)
   end
 
   def open_composer
@@ -46,7 +50,6 @@ RSpec.describe "Require Edit Reason", type: :system do
 
     it "warns when no reason added" do
       find(".save-or-cancel .create.disabled").click
-      
       expect(page).to have_css(".edit-enforcer.--highlight")
       expect(page).to have_css(".d-icon-triangle-exclamation")
       expect(page).to have_css(".save-or-cancel .create.disabled")
@@ -54,10 +57,14 @@ RSpec.describe "Require Edit Reason", type: :system do
   end
 
   context "grace period handling" do
+    before { unset_force_edit_grace_period }
+
     it "skips enforcement within grace period" do
       open_composer
+      expect(page).to have_css("#reply-control.open")
       expect(page).to have_no_css(".edit-enforcer")
       expect(page).to have_no_css(".create.disabled")
+
     end
   end
 
@@ -67,16 +74,16 @@ RSpec.describe "Require Edit Reason", type: :system do
     it "excludes non-group users" do
       group.remove(user)
       open_composer
-      
+
       expect(page).to have_no_css(".edit-enforcer")
       expect(page).to have_css(".btn-primary:not(.disabled)")
     end
 
     it "excludes users not in required group" do
-      admin.groups << edit_allowed_group  
+      admin.groups << edit_allowed_group
       sign_in(admin)
       open_composer
-      
+
       expect(page).to have_no_css(".edit-enforcer")
       expect(page).to have_css(".btn-primary:not(.disabled)")
     end
