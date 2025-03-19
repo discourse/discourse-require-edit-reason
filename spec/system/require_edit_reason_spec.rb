@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 RSpec.describe "Require Edit Reason", type: :system do
   let!(:theme) { upload_theme_component }
 
   fab!(:admin)
-  fab!(:user) { Fabricate(:user) }
-  fab!(:group) { Fabricate(:group) }
+  fab!(:user)
+  fab!(:group)
   fab!(:edit_allowed_group) { Fabricate(:group) }
   fab!(:post) { Fabricate(:post, user: user, created_at: 1.hour.ago) }
 
@@ -31,7 +32,7 @@ RSpec.describe "Require Edit Reason", type: :system do
     find(".post-action-menu__edit").click
   end
 
-  context "enforcement scenarios" do
+  context "in enforcement scenarios" do
     before do
       force_edit_grace_period
       open_composer
@@ -56,19 +57,18 @@ RSpec.describe "Require Edit Reason", type: :system do
     end
   end
 
-  context "grace period handling" do
+  context "when within grace period" do
     before { unset_force_edit_grace_period }
 
-    it "skips enforcement within grace period" do
+    it "skips enforcement" do
       open_composer
       expect(page).to have_css("#reply-control.open")
       expect(page).to have_no_css(".edit-enforcer")
       expect(page).to have_no_css(".create.disabled")
-
     end
   end
 
-  context "user permissions" do
+  context "with user permissions" do
     before { force_edit_grace_period }
 
     it "excludes non-group users" do

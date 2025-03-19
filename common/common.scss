@@ -2,11 +2,14 @@
   .edit-enforcer {
     order: 2;
     margin-left: 0.25em;
+
     .d-icon {
       color: var(--success);
     }
+
     &.--danger {
       color: var(--danger);
+
       .d-icon {
         color: var(--danger);
       }
