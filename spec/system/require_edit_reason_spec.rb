@@ -5,7 +5,7 @@ RSpec.describe "Require Edit Reason", type: :system do
   fab!(:admin)
   fab!(:user)
   fab!(:group)
-  fab!(:edit_allowed_group) { Fabricate(:group) }
+  fab!(:edit_allowed_group, :group)
   fab!(:post) { Fabricate(:post, user: user, created_at: 1.hour.ago) }
 
   before do
