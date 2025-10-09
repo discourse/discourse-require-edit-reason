@@ -1,6 +1,6 @@
 import { apiInitializer } from "discourse/lib/api";
 
-export default apiInitializer("1.15.0", (api) => {
+export default apiInitializer((api) => {
   const editReasonService = api.container.lookup("service:enforce-edit-reason");
 
   api.onAppEvent("composer:open", () => {

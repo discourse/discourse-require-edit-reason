@@ -4,7 +4,6 @@ import Service, { service } from "@ember/service";
 export default class EnforceEditReason extends Service {
   @service currentUser;
   @service composer;
-  @service siteSettings;
 
   @tracked enforceReason = false;
 
