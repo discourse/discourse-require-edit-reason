@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-RSpec.describe "Require Edit Reason", type: :system do
+RSpec.describe "Require Edit Reason" do
   let!(:theme) { upload_theme_component }
 
   fab!(:admin)
