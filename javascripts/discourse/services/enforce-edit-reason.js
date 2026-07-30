@@ -24,6 +24,12 @@ export default class EnforceEditReason extends Service {
   }
 
   get isInGroup() {
+    if (Object.hasOwn(settings, "user_in_edit_reason_required_groups")) {
+      return settings.user_in_edit_reason_required_groups;
+    }
+
+    // TODO (martin) Remove the below fallback code once core has
+    // resolve_group_membership available everywhere.
     const groupSetting = new Set(
       settings.edit_reason_required_groups?.split("|").map(Number)
     );

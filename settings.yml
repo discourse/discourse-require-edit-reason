@@ -2,6 +2,8 @@ edit_reason_required_groups:
   default: ""
   type: list
   list_type: group
+  resolve_group_membership: true
+  disallowed_groups: "0|5"
 
 edit_reason_grace_period:
   default: 0
